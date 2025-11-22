@@ -4,3 +4,40 @@
   position: relative;
   z-index: 1;
 }
+
+/* Social icons row styling */
+.social-row {
+  --social-bg: rgba(255,255,255,0.04);
+}
+
+.social-item {
+  background: var(--social-bg);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.social-item:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+/* Make layouts responsive on small screens */
+@media (max-width: 720px) {
+  .root {
+    padding: 1rem 0.5rem;
+  }
+
+  .social-row {
+    gap: 0.6rem;
+  }
+
+  .social-item {
+    width: 56px !important;
+    height: 56px !important;
+  }
+
+  .social-item i {
+    font-size: 28px !important;
+  }
+}
