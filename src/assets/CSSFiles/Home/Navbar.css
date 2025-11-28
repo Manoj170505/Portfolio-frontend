@@ -19,10 +19,11 @@
     padding: 8px;
     border-radius: 50%;
     transition: background-color 0.2s ease;
-    color: black;
+    color: white;
 }
 
 .navbar li.active div {
-    background-color: white; 
+    background-color: rgb(255, 255, 255); 
+    color: black;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
