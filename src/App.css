@@ -1,8 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import "tailwindcss";
 @plugin "flyonui";
 @import "flyonui/variants.css";
 @source "./node_modules/flyonui/flyonui.js";
 
 body {
-    background-color: white;
+    background-color: #000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Funnel Sans', sans-serif;
 }
