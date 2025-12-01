@@ -1,0 +1,58 @@
+.timeline-root {
+  width: 100%;
+  min-height: 100vh;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+.timeline-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Grey cards with text */
+.timeline-card {
+  width: 220px;
+  background: #bfbfbf;
+  padding: 20px;
+  box-sizing: border-box;
+  color: #ffffff;
+  font-weight: 700;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Year texts */
+.timeline-year {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+/* Middle row with curve and 2021 */
+.timeline-middle {
+  position: relative;
+  margin: 0 auto;
+  width: 60%;
+  height: 160px;
+}
+
+.timeline-curve {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 60%;
+  height: 100%;
+}
+
+.center-year {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
