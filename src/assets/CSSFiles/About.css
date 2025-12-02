@@ -23,15 +23,21 @@ img {
 h2 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-}
-
-h2 span {
     color: #0c8cf5;
     font-weight: bold;
 }
 
 h2 span1 {
     color: white;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+h3 span {
+    color: #0c8cf5;
     font-weight: bold;
 }
 
@@ -60,12 +66,79 @@ p {
 
 .about1 {
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     background: #020024;
     background: linear-gradient(180deg,rgba(5, 62, 121, 1) 30%, rgba(0, 1, 2, 1) 90%);
     color: white;
-    padding: 2rem;
+    padding: 5rem;
     gap: 2rem;
+}
+
+.edcard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    height: 500px;
+    width: 500px;
+    border-radius: 15px;
+    background-color: #ffffff;
+    color: #000000;
+    box-shadow: 8px 8px rgba(0, 0, 0, 0.35);
+    border: #ffffff solid 1px;
+}
+
+.edcardtop {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.certificate {
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #0c8cf5;
+    text-decoration-thickness: 2px;
+}
+
+.school {
+    font-size: 1.7rem;
+    font-weight: bold;
+    width: 50%;
+}
+
+.year {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #0c8cf5;
+}
+
+.pct {
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #0c8cf5;
+    width: 100%;
+    height: 150px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.edcard:hover {
+    transform: translateY(-10px);
+    box-shadow: 8px 8px rgba(0, 0, 0, 0.35);
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
 }
