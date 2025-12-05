@@ -4,8 +4,8 @@ import LightRays from '../Elements/LightRays'
 
 const Home = () => {
   return (
-    <div id='home' className='relative flex flex-col h-screen w-screen bg-none justify-center items-center'>
-    <div className="absolute inset-0 z-0">
+    <div id='home' className='relative flex flex-col h-screen bg-none justify-center items-center'>
+    <div className="absolute inset-0 z-0 h-screen overflow-hidden">
       <LightRays
         raysOrigin="top-center"
         raysColor="#0c8cf5"
