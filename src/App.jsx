@@ -1,19 +1,30 @@
+import { useState } from 'react'
 import './App.css'
 import Home from './assets/Components/Home'
 import About from './assets/Components/About'
 import Navbar from './assets/Components/Navbar'
 import Skills from './assets/Components/Skills'
 import Projects from './assets/Components/Projects'
+import DProjects from './assets/Components/DProjects'
 import Contact from './assets/Components/Contact'
+
 function App() {
+  const [view, setView] = useState('home');
+
   return (
     <>
-      <Navbar />
-      <Home />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
+      {view === 'home' ? (
+        <>
+          <Navbar />
+          <Home />
+          <About />
+          <Skills />
+          <Projects onViewAll={() => setView('projects')} />
+          <Contact />
+        </>
+      ) : (
+        <DProjects onBack={() => setView('home')} />
+      )}
     </>
   )
 }

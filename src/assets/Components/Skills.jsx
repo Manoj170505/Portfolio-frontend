@@ -1,13 +1,69 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Icon } from '@iconify/react';
-import "../CSSFiles/Skills.css"
+// import "../CSSFiles/Skills.css" // Removed as it was empty
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Skills = () => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Background Glow Animation
+      gsap.to(".skills-bg-glow", {
+        scale: 1.2,
+        opacity: 0.8,
+        duration: 4,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+
+      // Animate each section's items
+      const sections = document.querySelectorAll('.skill-section');
+
+      sections.forEach(section => {
+        gsap.from(section.querySelectorAll('li'), {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          },
+          y: 30,
+          opacity: 0,
+          scale: 0.8,
+          duration: 0.6,
+          stagger: 0.05,
+          ease: "back.out(1.5)"
+        });
+
+        gsap.from(section.querySelector('h1'), {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+          },
+          x: -30,
+          opacity: 0,
+          duration: 0.8,
+          ease: "power3.out"
+        });
+      });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center py-16 px-4">
-      <div className="max-w-6xl w-full space-y-16">
+    <div id="skills" ref={containerRef} className="min-h-screen flex flex-col justify-center items-center py-16 px-4 relative overflow-hidden">
+      {/* Background Glow */}
+      <div className="skills-bg-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none z-0"></div>
+
+      <div className="max-w-6xl w-full space-y-16 z-10 relative">
         {/* Frontend Section */}
-        <div className="text-center">
+        <div className="text-center skill-section">
           <h1 className="underlines text-4xl md:text-5xl font-bold text-white mb-8 tracking-wide">
             FRONTEND
           </h1>
@@ -64,7 +120,7 @@ const Skills = () => {
         </div>
 
         {/* Backend Section */}
-        <div className="text-center">
+        <div className="text-center skill-section">
           <h1 className="underlines text-4xl md:text-5xl font-bold text-white mb-8 tracking-wide">
             BACKEND
           </h1>
@@ -108,7 +164,7 @@ const Skills = () => {
         </div>
 
         {/* Software Section */}
-        <div className="text-center">
+        <div className="text-center skill-section">
           <h1 className="underlines text-4xl md:text-5xl font-bold text-white mb-8 tracking-wide">
             SOFTWARE
           </h1>
