@@ -7,6 +7,7 @@ import Skills from './assets/Components/Skills'
 import Projects from './assets/Components/Projects'
 import DProjects from './assets/Components/DProjects'
 import Contact from './assets/Components/Contact'
+import Footer from './assets/Components/Footer'
 
 function App() {
   const [view, setView] = useState('home');
@@ -21,6 +22,7 @@ function App() {
           <Skills />
           <Projects onViewAll={() => setView('projects')} />
           <Contact />
+          <Footer />
         </>
       ) : (
         <DProjects onBack={() => setView('home')} />

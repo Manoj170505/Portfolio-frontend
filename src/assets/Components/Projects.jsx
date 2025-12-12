@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import CardSwap, { Card } from '../Elements/Cardswap';
-import '../CSSFiles/Projects.css';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,7 +11,6 @@ const Projects = ({ onViewAll }) => {
         {
             title: 'Feedo',
             description: 'Feedo is a feedback management platform that allows users to submit feedback and view feedback submitted by others.',
-            link: 'https://feedo.com',
             image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/d9/fa/1b/lost-valley.jpg?w=1200&h=-1&s=1',
         },
         {

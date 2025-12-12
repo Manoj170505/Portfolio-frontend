@@ -1,0 +1,187 @@
+/* Education.css */
+
+.education-section {
+    padding: 6rem 2rem;
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    /* optional: background can be handled globally, but here is a fallback or specific gradient */
+    background: transparent;
+}
+
+.section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 4rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.section-title span {
+    color: #0c8cf5;
+    text-shadow: 0 0 10px rgba(12, 140, 245, 0.6);
+}
+
+.education-timeline {
+    position: relative;
+    max-width: 800px;
+    /* Constrain width for better readability */
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 2rem;
+}
+
+.timeline-line {
+    position: absolute;
+    left: 0;
+    top: 10px;
+    bottom: 0;
+    width: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(12, 140, 245, 0.2);
+    border-radius: 2px;
+}
+
+/* Add a glowing gradient to the line */
+.timeline-line::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 150px;
+    background: linear-gradient(to bottom, #0c8cf5, transparent);
+}
+
+.education-container {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 2.5rem;
+    /* Space between line and content */
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -2.6rem;
+    /* Align perfectly with the line (2rem padding + ~half dot width) */
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #1a1a1a;
+    border: 3px solid #0c8cf5;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #0c8cf5;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover .timeline-dot {
+    background-color: #0c8cf5;
+    box-shadow: 0 0 20px #0c8cf5, 0 0 40px #0c8cf5;
+    transform: scale(1.2);
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 12px;
+    position: relative;
+    transition: all 0.4s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-content:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(12, 140, 245, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.timeline-content::before {
+    /* Little arrow pointing to the dot */
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgba(255, 255, 255, 0.05);
+    transition: border-right-color 0.4s ease;
+}
+
+.timeline-content:hover::before {
+    border-right-color: rgba(255, 255, 255, 0.07);
+}
+
+.year {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: #0c8cf5;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.8rem;
+    border: 1px solid rgba(12, 140, 245, 0.3);
+    border-radius: 20px;
+    background: rgba(12, 140, 245, 0.1);
+}
+
+.timeline-content h3 {
+    font-size: 1.8rem;
+    margin: 0.5rem 0;
+    font-weight: 700;
+    color: #fff;
+}
+
+.timeline-content h4 {
+    font-size: 1.1rem;
+    margin: 0 0 1rem 0;
+    color: #aaa;
+    font-weight: 400;
+}
+
+.timeline-content .score {
+    font-size: 1rem;
+    color: #ddd;
+    font-style: italic;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+
+    .education-timeline {
+        padding-left: 1.5rem;
+    }
+
+    .timeline-line {
+        left: -5px;
+    }
+
+    .timeline-dot {
+        left: -17px;
+        /* Adjust for line position */
+        width: 16px;
+        height: 16px;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.4rem;
+    }
+}

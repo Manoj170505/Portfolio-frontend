@@ -5,6 +5,8 @@ import { Icon } from '@iconify/react';
 import CountUp from 'react-countup';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Education from './Education';
+import Experience from './Experience';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -64,26 +66,6 @@ const About = () => {
     return () => ctx.revert();
   }, []);
 
-  const education = [
-    {
-      title: "Secondary School Certificate",
-      school: "Migros KIDS Matriculation Higher Secondary School, Tirupur",
-      pct: "70%",
-      year: "2022"
-    },
-    {
-      title: "Higher Secondary School Certificate",
-      school: "Migros KIDS Matriculation Higher Secondary School, Tirupur",
-      pct: "71%",
-      year: "2023"
-    },
-    {
-      title: "Bachelor of Science in Computer Science",
-      school: "Bharathidasan College of Arts and Science, Erode",
-      pct: "78%",
-      year: "2026 (pursuing)"
-    }
-  ]
   return (
     <div ref={containerRef} className="">
       <div id="about" className="about about-section flex justify-center items-center min-h-screen text-white">
@@ -100,20 +82,8 @@ const About = () => {
           <img className="about-image" src={pfp} alt="" />
         </div>
       </div>
-      <div className='about1'>
-        {education.map((item, index) => (
-          <div key={index} className='edcard'>
-            <div className='edcardtop h-2/3'>
-              <h1 className='certificate'>{item.title}</h1>
-              <p className='school'>{item.school}</p>
-              <p className='year'>{item.year}</p>
-            </div>
-            <div className='pct h-1/3'>
-              <h1><CountUp end={parseFloat(item.pct)} duration={3} />%</h1>
-            </div>
-          </div>
-        ))}
-      </div>
+      <Education />
+      <Experience />
     </div>
   )
 }

@@ -54,7 +54,7 @@ const Home = () => {
         <h5>FULL-STACK DEVELOPER</h5>
         <p>"Always Strive To Be Better."</p>
         <div>
-          <button className='left-btn'>View My Projects</button>
+          <button className='left-btn' onClick={() => window.location.href = '#projects'}>View My Projects</button>
           <button className='right-btn'>Download CV</button>
         </div>
         <div>

@@ -54,22 +54,10 @@ const DProjects = ({ onBack }) => {
         },
     ], []);
 
-    const [activeCategory, setActiveCategory] = useState('All');
-    const [filteredProjects, setFilteredProjects] = useState(projects);
     const gridRef = useRef(null);
 
-    const categories = ['All', 'Web App', 'App', 'AI', 'IoT'];
-
     useEffect(() => {
-        if (activeCategory === 'All') {
-            setFilteredProjects(projects);
-        } else {
-            setFilteredProjects(projects.filter(project => project.category === activeCategory));
-        }
-    }, [activeCategory, projects]);
-
-    useEffect(() => {
-        // Animate grid items when they change
+        // Animate grid items on mount
         const ctx = gsap.context(() => {
             gsap.fromTo('.project-card',
                 {
@@ -89,7 +77,7 @@ const DProjects = ({ onBack }) => {
         }, gridRef);
 
         return () => ctx.revert();
-    }, [filteredProjects]);
+    }, []);
 
     return (
         <div className="d-projects-container">
@@ -101,21 +89,10 @@ const DProjects = ({ onBack }) => {
                     <span className="text-2xl">←</span> Back
                 </button>
                 <h1 className="d-projects-title">Featured Projects</h1>
-                <div className="d-projects-filter">
-                    {categories.map(category => (
-                        <button
-                            key={category}
-                            className={`filter-btn ${activeCategory === category ? 'active' : ''}`}
-                            onClick={() => setActiveCategory(category)}
-                        >
-                            {category}
-                        </button>
-                    ))}
-                </div>
             </div>
 
             <div className="d-projects-grid" ref={gridRef}>
-                {filteredProjects.map((project) => (
+                {projects.map((project) => (
                     <div key={project.id} className="project-card">
                         <div className="card-image-container">
                             <img src={project.image} alt={project.title} className="card-image" />
