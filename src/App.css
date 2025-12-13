@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Funnel+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 @plugin "flyonui";
 @import "flyonui/variants.css";
 @source "./node_modules/flyonui/flyonui.js";
@@ -9,7 +10,7 @@ html {
 }
 
 body {
-    background-color: #000;
+    @apply bg-gray-50 text-gray-900 dark:bg-black dark:text-white transition-colors duration-300;
     flex-direction: column;
     justify-content: center;
     align-items: center;

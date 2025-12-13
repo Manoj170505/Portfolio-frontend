@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from 'react';
 import CardSwap, { Card } from '../Elements/Cardswap';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -25,70 +24,27 @@ const Projects = ({ onViewAll }) => {
         },
     ];
 
-    const [selectedProject, setSelectedProject] = useState(0);
-    const containerRef = useRef(null);
-    const contentRef = useRef(null);
-
-    // Effect to automatically cycle through projects every 5 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setSelectedProject((prevIndex) => (prevIndex + 1) % projects.length);
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, [projects.length]);
-
-    // GSAP Animation
-    useEffect(() => {
-        const el = containerRef.current;
-        const content = contentRef.current;
-
-        const ctx = gsap.context(() => {
-            gsap.fromTo(content,
-                { opacity: 0, y: 50 },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 1,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: el,
-                        start: 'top 80%',
-                        end: 'bottom 20%',
-                        toggleActions: 'play none none reverse'
-                    }
-                }
-            );
-        }, el);
-
-        return () => ctx.revert();
-    }, []);
-
     return (
-        <div id='projects' ref={containerRef} className="min-h-screen flex justify-center items-center relative overflow-hidden px-4 py-16">
+        <div id='projects' className="min-h-screen flex justify-center items-center relative overflow-hidden px-4 py-16 z-10">
             <div className="relative z-10 max-w-7xl mx-auto w-full">
                 <div className="flex flex-col lg:flex-row justify-between items-center gap-12 lg:gap-20">
                     {/* Left Side: Project Details */}
-                    <div ref={contentRef} className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-6">
+                    <div className="flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left space-y-6">
                         <div className="space-y-2">
-                            <h1 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600 mb-2 tracking-tight drop-shadow-2xl">
+                            <h1 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#0c8cf5] to-[#8b5cf6] mb-2 drop-shadow-2xl">
                                 WORK
                             </h1>
-                            <div className="h-1 w-24 bg-blue-500 rounded-full mx-auto lg:mx-0"></div>
                         </div>
 
                         <div className="space-y-4 max-w-lg">
-                            <h2 className="text-3xl md:text-4xl font-bold text-white tracking-wide">
-                                {projects[selectedProject].title}
-                            </h2>
-                            <p className="text-lg text-gray-300 leading-relaxed font-light">
-                                {projects[selectedProject].description}
+                            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed font-light transition-colors">
+                                As the sole MERN Stack developer, I managed the entire development process, from conceptualizing the architecture to deploying the app. I focused on building a responsive, user-friendly interface and ensuring secure data handling for multi-user environments.
                             </p>
                         </div>
 
                         <div className="flex gap-4 pt-4">
                             <button
-                                className="px-8 py-3 rounded-full bg-white text-black font-bold hover:bg-gray-200 transition-all transform hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                                className="px-8 py-3 rounded-full bg-gray-900 text-white dark:bg-white dark:text-black font-bold hover:bg-gradient-to-r hover:from-[#0c8cf5] hover:to-[#8b5cf6] dark:hover:bg-gray-200 transition-all transform shadow-lg dark:shadow-[0_0_20px_rgba(255,255,255,0.3)]"
                                 onClick={onViewAll}
                             >
                                 View All Projects
@@ -96,9 +52,27 @@ const Projects = ({ onViewAll }) => {
                         </div>
                     </div>
 
-                    {/* Right Side: CardSwap */}
-                    <div className="flex-1 w-full flex justify-center items-center h-[500px]" style={{ perspective: '1000px' }}>
+                    {/* Mobile View: Standard Cards */}
+                    <div className="flex lg:hidden flex-col gap-8 w-full mt-8">
+                        {projects.map((project, index) => (
+                            <div key={index} className="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-xl border border-gray-200 dark:border-gray-800">
+                                <div className="h-48 overflow-hidden">
+                                     <img src={project.image || 'https://via.placeholder.com/400x300'} alt={project.title} className="w-full h-full object-cover" />
+                                </div>
+                                <div className="p-6">
+                                    <h3 className="text-2xl font-bold mb-2 text-gray-900 dark:text-white">{project.title}</h3>
+                                    <p className="text-gray-600 dark:text-gray-400 mb-4 text-sm">{project.description}</p>
+                                    <div className="w-12 h-1 bg-gradient-to-r from-[#0c8cf5] to-[#8b5cf6] rounded-full"></div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Desktop View: CardSwap */}
+                    <div className="hidden lg:flex flex-1 w-full justify-center items-center h-[600px] relative" style={{ perspective: '1000px' }}>
                         <CardSwap
+                            width={400}
+                            height={550}
                             cardDistance={50}
                             verticalDistance={60}
                             delay={6000}
@@ -107,7 +81,6 @@ const Projects = ({ onViewAll }) => {
                             {projects.map((project, index) => (
                                 <Card
                                     key={index}
-                                    onClick={() => setSelectedProject(index)}
                                     className="cursor-pointer bg-cover bg-center bg-no-repeat shadow-2xl border-2 border-white/10 rounded-2xl"
                                     style={{
                                         backgroundImage: `url(${project.image || 'https://via.placeholder.com/400x300?text=No+Image'})`,

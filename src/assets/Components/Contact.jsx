@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import '../CSSFiles/Contact.css';
 import { Icon } from '@iconify/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -26,71 +25,71 @@ const Contact = () => {
   }, []);
 
   return (
-    <div id="contact" ref={containerRef} className="contact-section">
-      <div className="contact-bg-glow"></div>
+    <div id="contact" ref={containerRef} className="contact-section min-h-screen flex justify-center items-center p-4 md:p-8 relative overflow-hidden z-10">
 
-      <div className="contact-container">
+      <div className="contact-container relative z-10 w-full max-w-6xl bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-2xl rounded-3xl flex flex-col md:flex-row overflow-hidden">
         {/* Left Side: Info */}
-        <div className="contact-info-side">
-          <div className="contact-header">
-            <h2>Let's chat.</h2>
-            <h2>Tell me about your project.</h2>
-            <p className="mt-4">Let's create something together. I'm open for new opportunities and interesting projects.</p>
+        <div className="contact-info-side flex-1 bg-gradient-to-br from-[#4f46e5]/90 to-[#06b6d4]/90 p-8 md:p-12 flex flex-col justify-between text-white relative overflow-hidden">
+          <div className="contact-header mb-8 md:mb-0">
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">Let's chat.</h2>
+            <h2 className="text-3xl md:text-5xl font-extrabold mb-4 leading-tight opacity-90">Tell me about your project.</h2>
+            <p className="mt-4 text-lg opacity-90 leading-relaxed">Let's create something together. I'm open for new opportunities and interesting projects.</p>
           </div>
 
-          <div className="contact-details">
-            <div className="contact-item">
-              <div className="contact-icon">
+          <div className="contact-details flex flex-col gap-6 mt-8 md:mt-12">
+            <div className="flex items-center gap-4 text-lg">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex justify-center items-center text-2xl backdrop-blur-sm">
                 <Icon icon="ic:round-email" />
               </div>
               <span>manojfa4451e@gmail.com</span>
             </div>
-            <div className="contact-item">
-              <div className="contact-icon">
+            <div className="flex items-center gap-4 text-lg">
+               <div className="w-12 h-12 rounded-full bg-white/20 flex justify-center items-center text-2xl backdrop-blur-sm">
                 <Icon icon="ic:round-phone" />
               </div>
               <span>+91 81220 84966</span>
             </div>
-            <div className="contact-item">
-              <div className="contact-icon">
+            <div className="flex items-center gap-4 text-lg">
+               <div className="w-12 h-12 rounded-full bg-white/20 flex justify-center items-center text-2xl backdrop-blur-sm">
                 <Icon icon="ic:round-location-on" />
               </div>
-              <span>Remote / India</span>
+              <span>Erode / Tamil Nadu</span>
             </div>
           </div>
 
-          <div className="social-links">
-            <a href="#" className="social-btn"><Icon icon="mdi:github" /></a>
-            <a href="#" className="social-btn"><Icon icon="mdi:linkedin" /></a>
-            <a href="#" className="social-btn"><Icon icon="mdi:twitter" /></a>
-            <a href="#" className="social-btn"><Icon icon="mdi:instagram" /></a>
+          <div className="social-links flex gap-4 mt-12">
+            {["mdi:github", "mdi:linkedin", "mdi:pinterest", "mdi:instagram"].map((icon, index) => (
+                <a key={index} href="#" className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex justify-center items-center text-xl text-white hover:bg-white hover:text-[#4f46e5] hover:-translate-y-1 transition-all duration-300">
+                    <Icon icon={icon} />
+                </a>
+            ))}
           </div>
         </div>
 
         {/* Right Side: Form */}
-        <div className="contact-form-side">
-          <form action="" className="w-full">
-            <div className="form-group">
-              <input type="text" className="form-input" placeholder=" " required />
-              <label className="form-label">Your Name</label>
+        <div className="contact-form-side flex-[1.5] p-8 md:p-12 bg-white/80 dark:bg-black/40 flex flex-col justify-center">
+          <form action="" className="w-full space-y-6">
+            <div className="group relative">
+              <input type="text" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Your Name" required />
+              <label className="absolute top-2 left-0 text-gray-500 dark:text-gray-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5] peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg">Your Name</label>
             </div>
 
-            <div className="form-group">
-              <input type="email" className="form-input" placeholder=" " required />
-              <label className="form-label">Email Address</label>
+            <div className="group relative">
+              <input type="email" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Email Address" required />
+              <label className="absolute top-2 left-0 text-gray-500 dark:text-gray-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5] peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg">Email Address</label>
             </div>
 
-            <div className="form-group">
-              <input type="text" className="form-input" placeholder=" " required />
-              <label className="form-label">Subject</label>
+            <div className="group relative">
+              <input type="text" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Subject" required />
+              <label className="absolute top-2 left-0 text-gray-500 dark:text-gray-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5] peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg">Subject</label>
             </div>
 
-            <div className="form-group">
-              <textarea className="form-input textarea" placeholder=" " rows="1" required></textarea>
-              <label className="form-label">Message</label>
+            <div className="group relative">
+              <textarea className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent resize-none min-h-[40px] focus:min-h-[100px]" placeholder="Message" rows="1" required></textarea>
+              <label className="absolute top-2 left-0 text-gray-500 dark:text-gray-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5] peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg">Message</label>
             </div>
 
-            <button type="submit" className="submit-btn max-w-xs">
+            <button type="submit" className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-[#0c8cf5] to-[#8b5cf6] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 uppercase tracking-wider">
               Send Message
             </button>
           </form>

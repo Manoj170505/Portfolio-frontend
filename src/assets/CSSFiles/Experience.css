@@ -23,8 +23,12 @@
 }
 
 .section-title span {
-    color: #0c8cf5;
-    text-shadow: 0 0 10px rgba(12, 140, 245, 0.6);
+    background: linear-gradient(90deg, #0c8cf5, #8b5cf6);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 0 10px rgba(12, 140, 245, 0.3));
 }
 
 .experience-timeline {

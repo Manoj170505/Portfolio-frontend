@@ -8,12 +8,13 @@ import Projects from './assets/Components/Projects'
 import DProjects from './assets/Components/DProjects'
 import Contact from './assets/Components/Contact'
 import Footer from './assets/Components/Footer'
+import { ThemeProvider } from './context/ThemeContext'
 
 function App() {
   const [view, setView] = useState('home');
 
   return (
-    <>
+    <ThemeProvider>
       {view === 'home' ? (
         <>
           <Navbar />
@@ -27,7 +28,7 @@ function App() {
       ) : (
         <DProjects onBack={() => setView('home')} />
       )}
-    </>
+    </ThemeProvider>
   )
 }
 
