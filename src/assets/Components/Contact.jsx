@@ -36,7 +36,7 @@ const Contact = () => {
             <p className="mt-4 text-lg opacity-90 leading-relaxed">Let's create something together. I'm open for new opportunities and interesting projects.</p>
           </div>
 
-          <div className="contact-details flex flex-col gap-6 mt-8 md:mt-12">
+          <div className="contact-details flex flex-col gap-6 mt-8 md:mt-12 hidden md:flex">
             <div className="flex items-center gap-4 text-lg">
               <div className="w-12 h-12 rounded-full bg-white/20 flex justify-center items-center text-2xl backdrop-blur-sm">
                 <Icon icon="ic:round-email" />
@@ -44,13 +44,13 @@ const Contact = () => {
               <span>manojfa4451e@gmail.com</span>
             </div>
             <div className="flex items-center gap-4 text-lg">
-               <div className="w-12 h-12 rounded-full bg-white/20 flex justify-center items-center text-2xl backdrop-blur-sm">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex justify-center items-center text-2xl backdrop-blur-sm">
                 <Icon icon="ic:round-phone" />
               </div>
               <span>+91 81220 84966</span>
             </div>
             <div className="flex items-center gap-4 text-lg">
-               <div className="w-12 h-12 rounded-full bg-white/20 flex justify-center items-center text-2xl backdrop-blur-sm">
+              <div className="w-12 h-12 rounded-full bg-white/20 flex justify-center items-center text-2xl backdrop-blur-sm">
                 <Icon icon="ic:round-location-on" />
               </div>
               <span>Erode / Tamil Nadu</span>
@@ -59,9 +59,9 @@ const Contact = () => {
 
           <div className="social-links flex gap-4 mt-12">
             {["mdi:github", "mdi:linkedin", "mdi:pinterest", "mdi:instagram"].map((icon, index) => (
-                <a key={index} href="#" className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex justify-center items-center text-xl text-white hover:bg-white hover:text-[#4f46e5] hover:-translate-y-1 transition-all duration-300">
-                    <Icon icon={icon} />
-                </a>
+              <a key={index} href="#" className="w-12 h-12 rounded-full bg-white/10 border border-white/20 flex justify-center items-center text-xl text-white hover:bg-white hover:text-[#4f46e5] hover:-translate-y-1 transition-all duration-300">
+                <Icon icon={icon} />
+              </a>
             ))}
           </div>
         </div>
@@ -71,22 +71,22 @@ const Contact = () => {
           <form action="" className="w-full space-y-6">
             <div className="group relative">
               <input type="text" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Your Name" required />
-              <label className="absolute top-2 left-0 text-gray-500 dark:text-gray-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5] peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg">Your Name</label>
+              <label className="absolute -top-6 left-0 text-gray-500 dark:text-gray-400 text-sm pointer-events-none transition-all duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5]">Your Name</label>
             </div>
 
             <div className="group relative">
               <input type="email" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Email Address" required />
-              <label className="absolute top-2 left-0 text-gray-500 dark:text-gray-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5] peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg">Email Address</label>
+              <label className="absolute -top-6 left-0 text-gray-500 dark:text-gray-400 text-sm pointer-events-none transition-all duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5]">Email Address</label>
             </div>
 
             <div className="group relative">
               <input type="text" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Subject" required />
-              <label className="absolute top-2 left-0 text-gray-500 dark:text-gray-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5] peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg">Subject</label>
+              <label className="absolute -top-6 left-0 text-gray-500 dark:text-gray-400 text-sm pointer-events-none transition-all duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5]">Subject</label>
             </div>
 
             <div className="group relative">
               <textarea className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent resize-none min-h-[40px] focus:min-h-[100px]" placeholder="Message" rows="1" required></textarea>
-              <label className="absolute top-2 left-0 text-gray-500 dark:text-gray-400 text-lg pointer-events-none transition-all duration-300 peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5] peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg">Message</label>
+              <label className="absolute -top-6 left-0 text-gray-500 dark:text-gray-400 text-sm pointer-events-none transition-all duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5]">Message</label>
             </div>
 
             <button type="submit" className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-[#0c8cf5] to-[#8b5cf6] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 uppercase tracking-wider">
