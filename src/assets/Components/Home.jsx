@@ -1,9 +1,12 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import axios from 'axios';
 import "../CSSFiles/Home.css"
 import LightRays from '../Elements/LightRays'
 import { gsap } from 'gsap'
 
 const Home = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const [social, setSocial] = useState(null);
   const containerRef = useRef(null)
 
   useEffect(() => {
@@ -31,6 +34,20 @@ const Home = () => {
 
     return () => ctx.revert()
   }, [])
+
+  useEffect(() => {
+    const fetchSocial = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/social`);
+        if (response.data) {
+          setSocial(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching social data:", error);
+      }
+    };
+    fetchSocial();
+  }, [API_URL]);
 
   return (
     <div id='home' ref={containerRef} className='relative flex flex-col h-screen overflow-hidden justify-center items-center'>
@@ -72,10 +89,10 @@ const Home = () => {
         </div>
         <div className="mt-8">
           <ul className='social-icons flex gap-8'>
-            <li><i className="bi bi-instagram text-3xl text-black dark:text-white hover:text-[#f50c9c] dark:hover:text-[#f50c9c] hover:drop-shadow-[0_0_10px_#f50c9c] transition-all duration-300 cursor-pointer"></i></li>
-            <li><i className="bi bi-github text-3xl text-black dark:text-white hover:text-black dark:hover:text-white hover:drop-shadow-[0_0_10px_black] dark:hover:drop-shadow-[0_0_10px_white] transition-all duration-300 cursor-pointer"></i></li>
-            <li><i className="bi bi-pinterest text-3xl text-black dark:text-white hover:text-[#f50c0c] dark:hover:text-[#f50c0c] hover:drop-shadow-[0_0_10px_#f50c0c] transition-all duration-300 cursor-pointer"></i></li>
-            <li><i className="bi bi-linkedin text-3xl text-black dark:text-white hover:text-[#0c69f5] dark:hover:text-[#0c69f5] hover:drop-shadow-[0_0_10px_#0c69f5] transition-all duration-300 cursor-pointer"></i></li>
+            <li><a href={social ? social.instagram : "#"} target='_blank' rel='noopener noreferrer'><i className="bi bi-instagram text-3xl text-black dark:text-white hover:text-[#f50c9c] dark:hover:text-[#f50c9c] hover:drop-shadow-[0_0_10px_#f50c9c] transition-all duration-300 cursor-pointer"></i></a></li>
+            <li><a href={social ? social.github : "#"} target='_blank' rel='noopener noreferrer'><i className="bi bi-github text-3xl text-black dark:text-white hover:text-black dark:hover:text-white hover:drop-shadow-[0_0_10px_black] dark:hover:drop-shadow-[0_0_10px_white] transition-all duration-300 cursor-pointer"></i></a></li>
+            <li><a href={social ? social.pinterest : "#"} target='_blank' rel='noopener noreferrer'><i className="bi bi-pinterest text-3xl text-black dark:text-white hover:text-[#f50c0c] dark:hover:text-[#f50c0c] hover:drop-shadow-[0_0_10px_#f50c0c] transition-all duration-300 cursor-pointer"></i></a></li>
+            <li><a href={social ? social.linkedin : "#"} target='_blank' rel='noopener noreferrer'><i className="bi bi-linkedin text-3xl text-black dark:text-white hover:text-[#0c69f5] dark:hover:text-[#0c69f5] hover:drop-shadow-[0_0_10px_#0c69f5] transition-all duration-300 cursor-pointer"></i></a></li>
           </ul>
         </div>
       </div>

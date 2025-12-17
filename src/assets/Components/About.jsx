@@ -1,4 +1,5 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import axios from 'axios';
 import pfp from '../Elements/PFP.jpeg'
 import { Icon } from '@iconify/react';
 import CountUp from 'react-countup';
@@ -10,6 +11,8 @@ import Experience from './Experience';
 gsap.registerPlugin(ScrollTrigger);
 
 const About = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
+  const [about, setAbout] = useState(null);
   const containerRef = useRef(null);
   const handleScroll = (section) => {
     const element = document.getElementById(section);
@@ -60,7 +63,21 @@ const About = () => {
     }, containerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, [about]); // Dependency on about so animations re-run if content changes significantly (optional)
+
+  useEffect(() => {
+    const fetchAbout = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/about`);
+        if (response.data) {
+          setAbout(response.data);
+        }
+      } catch (error) {
+        console.error("Error fetching about data:", error);
+      }
+    };
+    fetchAbout();
+  }, [API_URL]);
 
   return (
     <div ref={containerRef} className="relative overflow-hidden">
@@ -72,11 +89,15 @@ const About = () => {
                 FULL-STACK DEVELOPER
             </h2>
             <h3 className="text-xl md:text-2xl font-semibold">
-                MERN-STACK DEVELOPER <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0c8cf5] to-[#8b5cf6]">|</span> GRAPHIC DESIGNER <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#0c8cf5] to-[#8b5cf6]">|</span> UI DESIGNER
+                {about ? about.skills : "MERN-STACK DEVELOPER | GRAPHIC DESIGNER | UI DESIGNER"}
             </h3>
             <p className='text-lg md:text-xl leading-relaxed md:w-3/4 opacity-90'>
-              I'm <span className="font-bold text-[#0c8cf5]">Manoj</span>, a final year BSC Computer Science student with a deep passion for <span className="font-bold text-[#0c8cf5]">Full-Stack Development</span>.
-              I specialize in bridging the gap between elegant user experience and robust, scalable backend architecture, driven by the satisfaction of seeing a project through from concept to deployment.
+              {about ? about.description : (
+                <>
+                I'm <span className="font-bold text-[#0c8cf5]">Manoj</span>, a final year BSC Computer Science student with a deep passion for <span className="font-bold text-[#0c8cf5]">Full-Stack Development</span>.
+                I specialize in bridging the gap between elegant user experience and robust, scalable backend architecture, driven by the satisfaction of seeing a project through from concept to deployment.
+                </>
+              )}
             </p>
             <button 
                 className='flex items-center gap-2 px-8 py-3 rounded-full text-lg font-semibold bg-gray-900 text-white dark:bg-white dark:text-black hover:bg-gradient-to-r hover:from-[#0c8cf5] hover:to-[#8b5cf6] hover:text-white dark:hover:text-white hover:shadow-[0_0_15px_rgba(12,140,245,0.6)] transition-all duration-300' 
@@ -87,7 +108,7 @@ const About = () => {
           </div>
           <img 
             className="about-image w-full max-w-[300px] md:max-w-md rounded-2xl object-cover object-top border-4 border-white/50 dark:border-white/20 shadow-2xl" 
-            src={pfp} 
+            src={about && about.image ? about.image : pfp} 
             alt="Profile" 
           />
       </div>

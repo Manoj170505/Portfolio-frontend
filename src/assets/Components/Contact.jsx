@@ -1,12 +1,22 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Icon } from '@iconify/react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import axios from 'axios';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const containerRef = useRef(null);
+  const API_URL = import.meta.env.VITE_API_URL;
+  
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [status, setStatus] = useState({ loading: false, success: false, error: '' });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -23,6 +33,35 @@ const Contact = () => {
     }, containerRef);
     return () => ctx.revert();
   }, []);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setStatus({ ...status, error: '', success: false });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus({ loading: true, success: false, error: '' });
+
+    try {
+      await axios.post(`${API_URL}/contact`, formData);
+      setStatus({ loading: false, success: true, error: '' });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      
+      // Clear success message after 3 seconds
+      setTimeout(() => {
+        setStatus(prev => ({ ...prev, success: false }));
+      }, 5000);
+
+    } catch (error) {
+      console.error("Error sending message:", error);
+      setStatus({ 
+        loading: false, 
+        success: false, 
+        error: error.response?.data?.error || 'Failed to send message. Please try again.' 
+      });
+    }
+  };
 
   return (
     <div id="contact" ref={containerRef} className="contact-section min-h-screen flex justify-center items-center p-4 md:p-8 relative overflow-hidden z-10">
@@ -68,29 +107,87 @@ const Contact = () => {
 
         {/* Right Side: Form */}
         <div className="contact-form-side flex-[1.5] p-8 md:p-12 bg-white/80 dark:bg-black/40 flex flex-col justify-center">
-          <form action="" className="w-full space-y-6">
+          <form onSubmit={handleSubmit} className="w-full space-y-6">
+            
+            {status.success && (
+              <div className="p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-green-700 dark:text-green-400 font-medium animate-fade-in flex items-center gap-2">
+                <Icon icon="mdi:check-circle" className="text-xl" />
+                Message sent successfully!
+              </div>
+            )}
+            
+            {status.error && (
+              <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-lg text-red-700 dark:text-red-400 font-medium animate-fade-in flex items-center gap-2">
+                 <Icon icon="mdi:alert-circle" className="text-xl" />
+                {status.error}
+              </div>
+            )}
+
             <div className="group relative">
-              <input type="text" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Your Name" required />
+              <input 
+                type="text" 
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" 
+                placeholder="Your Name" 
+                required 
+              />
               <label className="absolute -top-6 left-0 text-gray-500 dark:text-gray-400 text-sm pointer-events-none transition-all duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5]">Your Name</label>
             </div>
 
             <div className="group relative">
-              <input type="email" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Email Address" required />
+              <input 
+                type="email" 
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" 
+                placeholder="Email Address" 
+                required 
+              />
               <label className="absolute -top-6 left-0 text-gray-500 dark:text-gray-400 text-sm pointer-events-none transition-all duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5]">Email Address</label>
             </div>
 
             <div className="group relative">
-              <input type="text" className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" placeholder="Subject" required />
+              <input 
+                type="text" 
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent" 
+                placeholder="Subject" 
+                required 
+              />
               <label className="absolute -top-6 left-0 text-gray-500 dark:text-gray-400 text-sm pointer-events-none transition-all duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5]">Subject</label>
             </div>
 
             <div className="group relative">
-              <textarea className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent resize-none min-h-[40px] focus:min-h-[100px]" placeholder="Message" rows="1" required></textarea>
+              <textarea 
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                className="peer w-full py-2 text-lg text-gray-900 dark:text-white border-b-2 border-gray-400 dark:border-gray-600 outline-none bg-transparent focus:border-[#0c8cf5] transition-colors placeholder-transparent resize-none min-h-[40px] focus:min-h-[100px]" 
+                placeholder="Message" 
+                rows="1" 
+                required
+              ></textarea>
               <label className="absolute -top-6 left-0 text-gray-500 dark:text-gray-400 text-sm pointer-events-none transition-all duration-300 peer-placeholder-shown:top-2 peer-placeholder-shown:text-lg peer-focus:-top-6 peer-focus:text-sm peer-focus:text-[#0c8cf5]">Message</label>
             </div>
 
-            <button type="submit" className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-[#0c8cf5] to-[#8b5cf6] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 uppercase tracking-wider">
-              Send Message
+            <button 
+              type="submit" 
+              disabled={status.loading}
+              className="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-[#0c8cf5] to-[#8b5cf6] text-white font-bold rounded-full shadow-lg hover:shadow-xl hover:-translate-y-1 transform transition-all duration-300 uppercase tracking-wider disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+            >
+              {status.loading ? (
+                <>
+                  <Icon icon="line-md:loading-twotone-loop" className="animate-spin text-2xl" />
+                  Sending...
+                </>
+              ) : (
+                'Send Message'
+              )}
             </button>
           </form>
         </div>
