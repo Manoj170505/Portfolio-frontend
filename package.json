@@ -2,6 +2,7 @@
   "name": "portfolio-frontend",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://Manoj170505.github.io/Portfolio-frontend",
   "type": "module",
   "scripts": {
     "dev": "vite",
