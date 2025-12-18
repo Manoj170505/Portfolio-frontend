@@ -13,14 +13,14 @@ const Projects = ({ onViewAll }) => {
             image: 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/0e/d9/fa/1b/lost-valley.jpg?w=1200&h=-1&s=1',
         },
         {
-            title: 'Project Alpha',
+            title: 'Spotifly',
             description: 'A cutting-edge AI solution optimizing workflow efficiency for enterprise clients.',
-            image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         },
         {
-            title: 'Neon Dash',
+            title: 'Arcade',
             description: 'An immersive cyberpunk-themed rhythm game with real-time multiplayer features.',
-            image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80',
+            image: 'https://images.unsplash.com/photo-1635187834534-d1fa994fcabb?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         },
     ];
 
