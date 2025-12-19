@@ -132,7 +132,9 @@ const Admin = () => {
             return;
         }
         try {
-            await axios.post(`${API_URL}/skill`, skillForm);
+            await axios.post(`${API_URL}/skill`, skillForm, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
             showNotification('Skill added successfully!', 'success');
             setSkillForm({ name: '', icon: '', color: '', category: 'Frontend' });
             fetchSkills();
@@ -144,7 +146,9 @@ const Admin = () => {
 
     const handleDeleteSkill = async (id) => {
         try {
-            await axios.delete(`${API_URL}/skill/${id}`);
+            await axios.delete(`${API_URL}/skill/${id}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
             showNotification('Skill deleted successfully!', 'success');
             fetchSkills();
         } catch (error) {
@@ -161,7 +165,9 @@ const Admin = () => {
             return;
         }
         try {
-            await axios.post(`${API_URL}/project`, projectForm);
+            await axios.post(`${API_URL}/project`, projectForm, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
             showNotification('Project added successfully!', 'success');
             setProjectForm({ name: '', description: '', image: '', link: '', github: '' });
             fetchProjects();
@@ -173,7 +179,9 @@ const Admin = () => {
 
     const handleDeleteProject = async (id) => {
         try {
-            await axios.delete(`${API_URL}/project/${id}`);
+            await axios.delete(`${API_URL}/project/${id}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
             showNotification('Project deleted successfully!', 'success');
             fetchProjects();
         } catch (error) {
@@ -190,7 +198,9 @@ const Admin = () => {
             return;
         }
         try {
-            await axios.post(`${API_URL}/experience`, experienceForm);
+            await axios.post(`${API_URL}/experience`, experienceForm, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
             showNotification('Experience added successfully!', 'success');
             setExperienceForm({ title: '', company: '', description: '', startDate: '', endDate: '' });
             fetchExperiences();
@@ -202,7 +212,9 @@ const Admin = () => {
 
     const handleDeleteExperience = async (id) => {
         try {
-            await axios.delete(`${API_URL}/experience/${id}`);
+            await axios.delete(`${API_URL}/experience/${id}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
             showNotification('Experience deleted successfully!', 'success');
             fetchExperiences();
         } catch (error) {
@@ -216,10 +228,14 @@ const Admin = () => {
         e.preventDefault();
         try {
             if (social && social.id) {
-                await axios.put(`${API_URL}/social/${social.id}`, socialForm);
+                await axios.put(`${API_URL}/social/${social.id}`, socialForm, {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
                 showNotification('Social links updated successfully!', 'success');
             } else {
-                await axios.post(`${API_URL}/social`, socialForm);
+                await axios.post(`${API_URL}/social`, socialForm, {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
                 showNotification('Social links created successfully!', 'success');
             }
             fetchSocial();
@@ -240,10 +256,14 @@ const Admin = () => {
              }
 
             if (about && about.id) {
-                await axios.put(`${API_URL}/about/${about.id}`, aboutForm);
+                await axios.put(`${API_URL}/about/${about.id}`, aboutForm, {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
                 showNotification('About section updated successfully!', 'success');
             } else {
-                await axios.post(`${API_URL}/about`, aboutForm);
+                await axios.post(`${API_URL}/about`, aboutForm, {
+                    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+                });
                 showNotification('About section created successfully!', 'success');
             }
             fetchAbout();
@@ -255,7 +275,9 @@ const Admin = () => {
 
     const handleDeleteMessage = async (id) => {
         try {
-            await axios.delete(`${API_URL}/contact/${id}`);
+            await axios.delete(`${API_URL}/contact/${id}`, {
+                headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+            });
             showNotification('Message deleted successfully!', 'success');
             fetchMessages();
         } catch (error) {
@@ -279,6 +301,7 @@ const Admin = () => {
                         <button 
                             onClick={() => {
                                 localStorage.removeItem('isAuthenticated');
+                                localStorage.removeItem('token');
                                 window.location.href = '/login';
                             }}
                             className="px-4 py-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg text-sm font-bold transition-colors"

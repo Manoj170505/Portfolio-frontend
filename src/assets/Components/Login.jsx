@@ -33,6 +33,7 @@ const Login = () => {
             const response = await axios.post(`${API_URL}/admin/login`, formData);
             if (response.status === 200) {
                 localStorage.setItem('isAuthenticated', 'true');
+                localStorage.setItem('token', response.data.token);
                 navigate('/admin');
             }
         } catch (err) {
